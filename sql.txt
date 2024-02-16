@@ -10,3 +10,9 @@ ALTER USER 'root '@'localhost' IDENTIFIED BY 'dmstj112';
 
 # 버전 인증 종류 바꾸기
 alter user root@localhost identified with mysql_native_password by 'dmstj112';
+
+# 필드 추가
+alter table member add column level tinyint unsigned default 1;
+
+# 어드민 샘플
+update member set id='admin', level=10, name='관리자' where id='bes2';

@@ -1,41 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const btn_id_check = document.querySelector("#btn_id_check")
-  btn_id_check.addEventListener("click", () =>{
-    const f_id = document.querySelector("#f_id")
-    if(f_id.value == "") {
-      alert(f_id.value)
-      return false
-    }
-    
-    //AJAX
-    const f1 = new FormData()
-
-    f1.append('id', f_id.value)
-    f1.append('mode', 'id_chk')
-
-    const xhr = new XMLHttpRequest()
-    xhr.open("POST", "./pg/member_process.php", true)
-    xhr.send(f1)
-
-    xhr.onload = () => {
-      if(xhr.status == 200) {
-        const data = JSON.parse(xhr.responseText)
-        if(data.result == "success") {
-          alert('사용이 가능한 아이디입니다.')
-          document.input_form.id_chk.value = "1"
-        } else if(data.result == "fail") {
-          document.input_form.id_chk.value = "0"
-          alert('이미 사용중인 아이디입니다.')
-          f_id.value = ''
-          f_id.focus()
-        } else if(data.result == "empty_id") {
-          alert('아이디를 입력하세요.')
-          f_id.focus()
-        }
-      }
-    }
-  })
-
   const btn_email_check = document.querySelector("#btn_email_check")
   btn_email_check.addEventListener("click", () =>{
     const f_email = document.querySelector("#f_email")
@@ -44,6 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
       return false
     }
     
+    if(document.input_form.old_email.value == f_email.value) {
+      alert('기존 이메일과 동일합니다.')
+      return false
+    }
+
     //AJAX
     const f2 = new FormData()
 
@@ -85,11 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
     f_id.focus()
     return false
   }
-  // 아이디 중복확인 여부 체크
-  if(f.id_chk.value == 0) {
-    alert('아이디 중복확인을 해주시기 바랍니다.')
-    return false
-  }
 
   if(f.f_name.value == '') {
     alert('이름을 입력해 주세요.')
@@ -98,13 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // 비밀번호 확인
-  if(f.password.value == '') {
-    alert('비밀번호를 입력해 주세요.')
-    f.password.focus()
-    return false
-  }
-
-  if(f.password2.value == '') {
+  if(f.password.value !== '' && f.password2.value == '') {
     alert('확인용 비밀번호를 입력해 주세요.')
     f.password.focus()
     return false
@@ -124,11 +81,12 @@ document.addEventListener("DOMContentLoaded", () => {
     f_email.focus()
     return false
   }
-  // 아이디 중복확인 여부 체크
-  if(f.email_chk.value == 0) {
-    alert('이메일 중복확인을 해주시기 바랍니다.')
-    return false
-  }
+  if(f.old_email.value != f.email.value) {
+    if(f.email_chk.value == 0) {
+      alert('이메일 중복확인을 해주시기 바랍니다.')
+      return false
+    }
+  }  
 
   if(f.f_zipcode.value == '') {
     alert('우편번호를 입력해 주세요.')

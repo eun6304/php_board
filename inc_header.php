@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?= (isset($g_title) && $g_title != '') ?  $g_title : ''; ?></title>
+  <title><?= (isset($g_title) && $g_title != '') ?  $g_title : 'Modhaus'; ?></title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   <?php
@@ -30,7 +30,16 @@
         ?>
           <li class="nav-item"><a href="index.php" class="nav-link <?= ($menu_code == 'home') ? 'active' : '';"" ?>"" aria-current="page">Home</a></li>
           <li class="nav-item"><a href="company.php" class="nav-link <?= ($menu_code == 'company') ? 'active' : '';"" ?>"">회사소개</a></li>
-          <li ="nav-item"><a href="stipulation.php" class="nav-link <?= ($menu_code == 'member') ? 'active' : '';"" ?>">마이페이지</a></li>
+          <?php if($ses_level == 10) {
+          ?>
+          <li class="nav-item"><a href="./admin/" class="nav-link <?= ($menu_code == 'admin') ? 'active' : '';"" ?>">Admin</a></li>
+          <?php
+          }else {
+          ?>
+          <li class="nav-item"><a href="mypage.php" class="nav-link <?= ($menu_code == 'mypage') ? 'active' : '';"" ?>">마이페이지</a></li>
+          <?php
+          }
+          ?>
           <li class="nav-item"><a href="board.php" class="nav-link <?= ($menu_code == 'board') ? 'active' : '';"" ?>"">게시판</a></li>
           <li class="nav-item"><a href="./pg/logout.php" class="nav-link <?= ($menu_code == 'login') ? 'active' : '';"" ?>"">로그아웃</a></li>
         <?php
