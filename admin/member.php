@@ -7,19 +7,22 @@ $menu_code = 'member';
 
 include './inc_common.php';
 include './inc_header.php';
-include '../inc/dbconfig.php';
-include '../inc/member.php'; // 회원관리 Class
-include '../inc/lib.php'; // 페이지네이션
+include '../lib/classes/DB/dbconfig.php';
+include '../lib/classes/member.php'; // 회원관리 Class
+include '../lib/include/lib.php'; // 페이지네이션
 
 $sn = (isset($_GET['sn']) && $_GET['sn'] !== '' && is_numeric($_GET['sn'])) ? $_GET['sn'] : '';
 $sf = (isset($_GET['sf']) && $_GET['sf'] !== '') ? $_GET['sf'] : '';
 
+$paramArr = [ 'sn' => $sn, 'sf' => $sf ];
+
 $mem = new Member($db);
-$total  = $mem -> total();
+
+// 검색했을 시 total에 따라 pagenation 바뀌어야 해서 param추가
+$total  = $mem -> total($paramArr);
 $limit = 5;
 $page_limit = 5;
 $page = (isset($_GET['page']) && $_GET['page'] != '' && is_numeric($_GET['page'])) ? $_GET['page'] : 1;
-$paramArr = [ 'sn' => $sn, 'sf' => $sf ];
 $param = '';
 
 $memArr = $mem -> list($page, $limit, $paramArr);
@@ -51,8 +54,8 @@ $memArr = $mem -> list($page, $limit, $paramArr);
       <td><?= $row['email'] ?></td>
       <td><?= $row['create_at'] ?></td>
       <td>
-        <button class="btn btn-primary btn-sm">수정</button>
-        <button class="btn btn-danger btn-sm">삭제</button>
+        <button class="btn btn-primary btn-sm btn_mem_edit"  data-idx="<?= $row['idx'] ?>">수정</button>
+        <button class="btn btn-danger btn-sm btn_mem_delete" data-idx="<?= $row['idx'] ?>">삭제</button>
       </td>
     </tr>
     <?php
@@ -68,10 +71,14 @@ $memArr = $mem -> list($page, $limit, $paramArr);
     </select>
     <input type="text" class="form-control w-25" id="sf" name="sf">
     <button class="btn btn-primary w-25"id="btn_search">검색</button>
+    <button class="btn btn-success w-25"id="btn_all">전체목록</button>
+
   </div>
 
   <div class="d-flex mt-3 justify-content-between align-items-start">
     <?php
+      // fist, last page 넘길 때 링크에 붙여주기 위함.
+      $param = '&sn=' .$sn. '&sf=' . $sf;
       echo my_pagination($total, $limit, $page_limit, $page, $param);
     ?>
     <button class="btn btn-primary" id="btn_excel">엑셀로 저장</button>

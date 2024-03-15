@@ -1,17 +1,18 @@
 <?php
-// 세션을 사용하겠다.
-session_start();
+include './lib/include/inc_common.php';
+include './lib/classes/DB/dbconfig.php';
+include './lib/classes/boardManage.php';
 
-$ses_id = (isset($_SESSION['ses_id']) && $_SESSION['ses_id'] != '') ? $_SESSION['ses_id'] : '';
-$ses_level = (isset($_SESSION['ses_level']) && $_SESSION['ses_level'] != '') ? $_SESSION['ses_level'] : '';
-
-$js_array = ['js/home.js'];
+$js_array = ['./app/assets/scripts/home.js'];
 
 $g_title = 'Modhaus';
 
 $menu_code = 'home';
 
-include './inc_header.php';
+$boardm = new BoardManage($db);
+$boardArr = $boardm->list();
+
+include './lib/include/inc_header.php';
 
 ?>
 
@@ -24,5 +25,5 @@ include './inc_header.php';
 
 
 <?php
-include './inc_footer.php';
+include './lib/include/inc_footer.php';
 ?>

@@ -25,7 +25,7 @@ include './inc_header.php';
 ?>
 
 <main class="w-75 mx-auto border rounded-5 p-5 d-flex gap-5" style="height : calc(100vh - 313px)">
-  <img src="../images/Modhaus_5.jpg" class="w-30 h-50" alt="">
+  <img src="../app/assets/images/Modhaus_5.jpg" class="w-30 h-50" alt="">
   <div>
     <h3>home 입니다. </h3>
   </div>
