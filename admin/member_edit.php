@@ -7,9 +7,9 @@ $menu_code = 'member';
 
 include './inc_common.php';
 include './inc_header.php';
-include '../lib/classes/DB/dbconfig.php';
-include '../lib/classes/member.php'; // 회원관리 Class
-include '../lib/include/lib.php'; // 페이지네이션
+include '../inc/dbconfig.php';
+include '../inc/member.php'; // 회원관리 Class
+include '../inc/lib.php'; // 페이지네이션
 
 $idx = (isset($_GET['idx']) && $_GET['idx'] != '' && is_numeric($_GET['idx']) ) ? $_GET['idx'] : '';
 if($idx == '') {
@@ -100,7 +100,7 @@ $row = $mem->getInfoFormIdx($idx);
       <?php if($row['photo'] != '') {
         echo '<img src="./data/profile/'.$row['photo'].'" id="f_preview" class="w-25" alt="profile image">';
       } else {
-        echo '<img src="../app/assets/images/person.png" id="f_preview" class="w-25" alt="profile image">';
+        echo '<img src="../images/person.png" id="f_preview" class="w-25" alt="profile image">';
       }
       ?>
     </div>

@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const btn_board_view = document.querySelectorAll(".btn_board_view")
   btn_board_view.forEach((box) => {
     box.addEventListener("click", () => {
-      self.location.href = '../../app/views/board.php?bcode=' + box.dataset.bcode
+      self.location.href = '../board.php?bcode=' + box.dataset.bcode
     })
   })
 

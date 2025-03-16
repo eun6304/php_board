@@ -7,9 +7,9 @@ $menu_code = 'board';
 
 include './inc_common.php';
 include './inc_header.php';
-include '../lib/classes/DB/dbconfig.php';
-include '../lib/classes/boardManage.php'; // 회원관리 Class
-include '../lib/include/lib.php'; // 페이지네이션
+include '../inc/dbconfig.php';
+include '../boardManage.php'; // 회원관리 Class
+include '../inc/lib.php'; // 페이지네이션
 
 $sn = (isset($_GET['sn']) && $_GET['sn'] !== '' && is_numeric($_GET['sn'])) ? $_GET['sn'] : '';
 $sf = (isset($_GET['sf']) && $_GET['sf'] !== '') ? $_GET['sf'] : '';

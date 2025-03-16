@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     f2.append('mode', 'email_chk')
 
     const xhr = new XMLHttpRequest()
-    xhr.open("POST", "../../app/controllers/member_process.php", true)
+    xhr.open("POST", "../../pg/member_process.php", true)
     xhr.send(f2)
 
     xhr.onload = () => {

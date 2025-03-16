@@ -7,9 +7,9 @@ $menu_code = 'member';
 
 include './inc_common.php';
 include './inc_header.php';
-include '../lib/classes/DB/dbconfig.php';
-include '../lib/classes/member.php'; // 회원관리 Class
-include '../lib/include/lib.php'; // 페이지네이션
+include '../inc/dbconfig.php';
+include '../inc/member.php'; // 회원관리 Class
+include '../inc/lib.php'; // 페이지네이션
 
 $sn = (isset($_GET['sn']) && $_GET['sn'] !== '' && is_numeric($_GET['sn'])) ? $_GET['sn'] : '';
 $sf = (isset($_GET['sf']) && $_GET['sf'] !== '') ? $_GET['sf'] : '';
@@ -45,7 +45,7 @@ $memArr = $mem -> list($page, $limit, $paramArr);
     </tr>
     <?php
       foreach($memArr AS $row) {
-        $row['create_at'] = substr($row['create_at'],0,16)
+        // $row['create_at'] = substr($row['create_at'],0,16)
     ?>
     <tr>
       <td><?= $row['idx'] ?></td>
